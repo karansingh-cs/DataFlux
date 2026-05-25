@@ -1,0 +1,6 @@
+DeviceName,DeviceType,StartOutput,StopOutput,FaultInput
+ConveyorMain,Motor,%QX0.0,%QX0.1,%IX0.0
+ConveyorFeed,Motor,%QX1.0,%QX1.1,%IX1.0
+ConveyorExit,Motor,%QX2.0,%QX2.1,%IX2.0
+ValveInlet,Valve,%QX3.0,%QX3.1,%IX3.0
+ValveOutlet,Valve,%QX4.0,%QX4.1,%IX4.0

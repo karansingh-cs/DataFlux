@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="ConveyorFeed" Id="{5177e8e4-938b-477b-ae00-9fe233322905}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ConveyorFeed
+VAR_INPUT
+    Start       : BOOL;
+    Stop        : BOOL;
+    FaultReset  : BOOL;
+END_VAR
+VAR_OUTPUT
+    Running     : BOOL;
+    Faulted     : BOOL;
+END_VAR
+VAR
+    RunningInternal : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF FaultReset THEN
+    Faulted := FALSE;
+END_IF
+
+IF Start AND NOT Faulted THEN
+    RunningInternal := TRUE;
+END_IF
+
+IF Stop THEN
+    RunningInternal := FALSE;
+END_IF
+
+Running := RunningInternal;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
