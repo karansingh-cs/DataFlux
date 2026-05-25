@@ -9,7 +9,7 @@ REQUIRED_COLUMNS    = ['DeviceName', 'DeviceType', 'StartOutput', 'StopOutput', 
 
 errors_found = False
 
-with open(f'{BASE_PATH}\\devices.csv', newline='') as f:
+with open(os.path.join(BASE_PATH, 'devices.csv'), newline='') as f:
     reader = csv.DictReader(f)
 
     # Check all required columns exist
