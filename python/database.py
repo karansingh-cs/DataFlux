@@ -1,7 +1,8 @@
 import sqlite3
+from config import AMS_NET_ID, DB_PATH
 
 # Create (or connect to) the database file
-conn = sqlite3.connect('dataflux.db')
+conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
 # Create the table

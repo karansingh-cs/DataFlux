@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>DataFlux</title>
     <style>
         body { font-family: Arial; background: #1e1e1e; color: #fff; padding: 40px; }
@@ -10,20 +11,35 @@
     </style>
 </head>
 <body>
-    <h1>DataFlux — Live Machine Monitor</h1>
+    <h1>DataFlux - Live Machine Monitor</h1>
 
     <div class="card">
         <div class="label">CONVEYOR RUNNING</div>
         <div id="ConveyorRunning">--</div>
     </div>
     <div class="card">
-        <div class="label">MOTOR TEMP (°F)</div>
+        <div class="label">MOTOR TEMP (F)</div>
         <div id="MotorTemp">--</div>
     </div>
     <div class="card">
         <div class="label">PART COUNT</div>
         <div id="PartCount">--</div>
     </div>
+
+    <h2 style="color:#00d4ff; margin-top:40px;">Last 10 Readings</h2>
+    <table id="HistoryTable" style="width:100%; border-collapse:collapse;">
+        <thead>
+            <tr style="color:#888; text-align:left;">
+                <th>Id</th>
+                <th>Timestamp</th>
+                <th>Running</th>
+                <th>Temp</th>
+                <th>Parts</th>
+            </tr>
+        </thead>
+        <tbody id="HistoryBody">
+        </tbody>
+    </table>
 
     <script>
         const ws = new WebSocket('ws://localhost:8000/ws');
@@ -34,6 +50,29 @@
             document.getElementById('MotorTemp').innerText       = data.MotorTemp;
             document.getElementById('PartCount').innerText       = data.PartCount;
         };
+
+        // Fetch history from database every 5 seconds
+        function loadHistory() {
+            fetch('/history')
+                .then(response => response.json())
+                .then(data => {
+                    const body = document.getElementById('HistoryBody');
+                    body.innerHTML = '';
+                    data.forEach(row => {
+                        body.innerHTML += `
+                            <tr style="border-top: 1px solid #444;">
+                                <td>${row.Id}</td>
+                                <td>${row.Timestamp}</td>
+                                <td>${row.ConveyorRunning}</td>
+                                <td>${row.MotorTemp}</td>
+                                <td>${row.PartCount}</td>
+                            </tr>`;
+                    });
+                });
+        }
+
+        loadHistory();
+        setInterval(loadHistory, 5000);
     </script>
 </body>
 </html>

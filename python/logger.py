@@ -1,13 +1,14 @@
 import pyads
 import sqlite3
 import time
+from config import AMS_NET_ID, DB_PATH
 
 # Connect to PLC
-plc = pyads.Connection('192.168.1.10.1.1', pyads.PORT_TC3PLC1)
+plc = pyads.Connection(AMS_NET_ID, pyads.PORT_TC3PLC1)
 plc.open()
 
 # Connect to database
-conn = sqlite3.connect('dataflux.db')
+conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
 print('DataFlux logger started...')

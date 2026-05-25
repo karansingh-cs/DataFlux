@@ -1,8 +1,9 @@
 import pyads
 import time
+from config import AMS_NET_ID, DB_PATH
 
 # Connect to local TwinCAT runtime
-plc = pyads.Connection('192.168.1.10.1.1', pyads.PORT_TC3PLC1)
+plc = pyads.Connection(AMS_NET_ID, pyads.PORT_TC3PLC1)
 plc.open()
 
 try:

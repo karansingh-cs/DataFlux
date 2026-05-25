@@ -1,6 +1,7 @@
 import sqlite3
+from config import AMS_NET_ID, DB_PATH
 
-conn = sqlite3.connect('dataflux.db')
+conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
 cursor.execute('SELECT * FROM MachineData ORDER BY Id DESC LIMIT 10')
