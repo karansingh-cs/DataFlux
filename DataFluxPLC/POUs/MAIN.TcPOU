@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="MAIN" Id="{c7a1bc91-dcde-41b5-a4ba-f34c52173b03}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+    CycleTimer : TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CycleTimer(IN := NOT CycleTimer.Q, PT := T#1S);
+
+IF CycleTimer.Q THEN
+    MachineData.PartCount := MachineData.PartCount + 1;
+    MachineData.MotorTemp       := MachineData.MotorTemp + 0.1;
+    MachineData.ConveyorRunning := TRUE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

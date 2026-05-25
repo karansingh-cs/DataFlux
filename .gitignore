@@ -1,0 +1,19 @@
+# SQLite database file
+*.db
+
+# TwinCAT build artifacts
+_Boot/
+_CompileInfo/
+_Libraries/
+*.compiled-library
+*.compileinfo
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# VS/TwinCAT user files
+*.user
+*.suo
+.vs/
