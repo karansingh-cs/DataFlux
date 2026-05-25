@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataFlux</title>
+    <style>
+        body { font-family: Arial; background: #1e1e1e; color: #fff; padding: 40px; }
+        h1   { color: #00d4ff; }
+        .card { background: #2d2d2d; padding: 20px; margin: 10px 0; border-radius: 8px; font-size: 1.4em; }
+        .label { color: #888; font-size: 0.7em; }
+    </style>
+</head>
+<body>
+    <h1>DataFlux — Live Machine Monitor</h1>
+
+    <div class="card">
+        <div class="label">CONVEYOR RUNNING</div>
+        <div id="ConveyorRunning">--</div>
+    </div>
+    <div class="card">
+        <div class="label">MOTOR TEMP (°F)</div>
+        <div id="MotorTemp">--</div>
+    </div>
+    <div class="card">
+        <div class="label">PART COUNT</div>
+        <div id="PartCount">--</div>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8000/ws');
+
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            document.getElementById('ConveyorRunning').innerText = data.ConveyorRunning;
+            document.getElementById('MotorTemp').innerText       = data.MotorTemp;
+            document.getElementById('PartCount').innerText       = data.PartCount;
+        };
+    </script>
+</body>
+</html>
