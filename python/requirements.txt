@@ -1,0 +1,6 @@
+pyads
+fastapi
+uvicorn
+websockets
+jinja2
+openpyxl
