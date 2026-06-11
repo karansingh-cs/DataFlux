@@ -8,5 +8,5 @@
     <Platform Name="TwinCAT RT (x64)" />
     <Platform Name="TwinCAT RT (x86)" />
   </Configurations>
-  <Project Path="DataFlux.tsproj" Type="b1e792be-aa5f-4e3c-8c82-674bf9c0715b" />
+  <Project Path="D:/Projects/Beckhoff/UNICORN/DataFlux/DataFlux.tsproj" Type="b1e792be-aa5f-4e3c-8c82-674bf9c0715b" Id="9a5e4277-1da7-f15c-89b1-24cd7bf94ac5" />
 </Solution>
