@@ -10,7 +10,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{4090EA37-3ED3-48A4-9D26-36CE99DDFCD9}" Name="DataFluxPLC" PrjFilePath="DataFluxPLC\DataFluxPLC.plcproj" TmcFilePath="DataFluxPLC\DataFluxPLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{1C8C0F69-2C74-8CEE-1512-4EFC1A323B26}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{1C8C0F69-2C74-8CEE-1512-4EFC1A323B26}" TmcPath="DataFluxPLC\DataFluxPLC.tmc">
 					<Name>DataFluxPLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

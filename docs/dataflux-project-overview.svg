@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">DataFlux project overview and runtime flow</title>
+  <desc id="desc">Infographic explaining how DataFlux bridges Beckhoff TwinCAT PLC data to Python services, SQLite storage, a FastAPI dashboard, and TwinCAT code generation.</desc>
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7fafc"/>
+      <stop offset="0.46" stop-color="#edf7f4"/>
+      <stop offset="1" stop-color="#fff7ed"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#16324f"/>
+      <stop offset="0.55" stop-color="#006a71"/>
+      <stop offset="1" stop-color="#c36b24"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#16324f" flood-opacity="0.13"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#006a71"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c36b24"/>
+    </marker>
+    <style>
+      .bg { fill: url(#page); }
+      .title { font: 800 54px/1.1 "Segoe UI", Arial, sans-serif; fill: #ffffff; letter-spacing: 0; }
+      .subtitle { font: 500 23px/1.4 "Segoe UI", Arial, sans-serif; fill: #e9fbf7; letter-spacing: 0; }
+      .kicker { font: 700 16px/1 "Segoe UI", Arial, sans-serif; fill: #dff7f1; text-transform: uppercase; letter-spacing: 2px; }
+      .sectionTitle { font: 800 28px/1.2 "Segoe UI", Arial, sans-serif; fill: #16324f; letter-spacing: 0; }
+      .cardTitle { font: 800 24px/1.1 "Segoe UI", Arial, sans-serif; fill: #16324f; letter-spacing: 0; }
+      .cardText { font: 500 18px/1.35 "Segoe UI", Arial, sans-serif; fill: #36546c; letter-spacing: 0; }
+      .smallText { font: 600 15px/1.2 "Segoe UI", Arial, sans-serif; fill: #5a7184; letter-spacing: 0; }
+      .tinyText { font: 600 13px/1.1 "Segoe UI", Arial, sans-serif; fill: #6c8192; letter-spacing: 0; }
+      .labelText { font: 800 16px/1 "Segoe UI", Arial, sans-serif; fill: #006a71; letter-spacing: 0; }
+      .pillText { font: 800 15px/1 "Segoe UI", Arial, sans-serif; fill: #16324f; letter-spacing: 0; }
+      .card { fill: #ffffff; stroke: #d9e8e6; stroke-width: 2; rx: 18; filter: url(#shadow); }
+      .mini { fill: #f7fbfa; stroke: #cfe2df; stroke-width: 1.5; rx: 12; }
+      .orangeMini { fill: #fff7ed; stroke: #f3cfab; stroke-width: 1.5; rx: 12; }
+      .blueMini { fill: #eef6ff; stroke: #c9dff2; stroke-width: 1.5; rx: 12; }
+      .flowLine { fill: none; stroke: #006a71; stroke-width: 5; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
+      .orangeLine { fill: none; stroke: #c36b24; stroke-width: 5; marker-end: url(#arrowOrange); stroke-linecap: round; stroke-linejoin: round; }
+      .softLine { fill: none; stroke: #9eb9b6; stroke-width: 3; stroke-dasharray: 8 10; marker-end: url(#arrow); stroke-linecap: round; }
+      .iconStroke { fill: none; stroke: #16324f; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .iconFill { fill: #dff7f1; stroke: #006a71; stroke-width: 5; }
+      .orangeIcon { fill: #fff0dc; stroke: #c36b24; stroke-width: 5; }
+      .statusDone { fill: #dcfce7; stroke: #86c995; stroke-width: 1.5; }
+      .statusNext { fill: #f4f7fb; stroke: #cbd5e1; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="1000"/>
+  <rect x="64" y="48" width="1472" height="178" rx="28" fill="url(#header)" filter="url(#shadow)"/>
+  <text class="kicker" x="108" y="97">Beckhoff TwinCAT 3 + Python industrial edge platform</text>
+  <text class="title" x="108" y="158">DataFlux</text>
+  <text class="subtitle" x="108" y="197">Streams live PLC data into storage, dashboards, and generated TwinCAT code without heavy SCADA middleware.</text>
+
+  <g transform="translate(1248 76)">
+    <rect x="0" y="0" width="238" height="116" rx="18" fill="#ffffff" opacity="0.18"/>
+    <text class="subtitle" x="24" y="40">Current phases</text>
+    <text class="title" x="24" y="92" style="font-size:42px">1-4 live</text>
+  </g>
+
+  <text class="sectionTitle" x="94" y="290">How it works at runtime</text>
+
+  <g transform="translate(86 325)">
+    <rect class="card" x="0" y="0" width="298" height="206"/>
+    <circle class="iconFill" cx="58" cy="58" r="28"/>
+    <path class="iconStroke" d="M58 31v54M31 58h54"/>
+    <text class="cardTitle" x="104" y="52">TwinCAT PLC</text>
+    <text class="cardText" x="104" y="82">Real-time machine logic</text>
+    <rect class="blueMini" x="26" y="112" width="246" height="64"/>
+    <text class="smallText" x="44" y="137">MachineData GVL</text>
+    <text class="tinyText" x="44" y="160">ConveyorRunning, MotorTemp, PartCount</text>
+  </g>
+
+  <path class="flowLine" d="M397 428 C442 428 458 428 500 428"/>
+  <text class="labelText" x="417" y="401">ADS / pyads</text>
+
+  <g transform="translate(512 325)">
+    <rect class="card" x="0" y="0" width="298" height="206"/>
+    <circle class="iconFill" cx="58" cy="58" r="28"/>
+    <path class="iconStroke" d="M44 58h28M58 44v28M75 75l18 18"/>
+    <text class="cardTitle" x="104" y="52">Logger service</text>
+    <text class="cardText" x="104" y="82">Reads PLC values every second</text>
+    <rect class="mini" x="26" y="112" width="246" height="64"/>
+    <text class="smallText" x="44" y="137">python/logger.py</text>
+    <text class="tinyText" x="44" y="160">Poll, normalize, insert rows</text>
+  </g>
+
+  <path class="flowLine" d="M823 428 C868 428 884 428 926 428"/>
+  <text class="labelText" x="850" y="401">INSERT</text>
+
+  <g transform="translate(938 325)">
+    <rect class="card" x="0" y="0" width="262" height="206"/>
+    <ellipse class="iconFill" cx="60" cy="43" rx="35" ry="14"/>
+    <path class="iconStroke" d="M25 43v52c0 8 16 15 35 15s35-7 35-15V43M25 69c0 8 16 15 35 15s35-7 35-15"/>
+    <text class="cardTitle" x="112" y="52">SQLite DB</text>
+    <text class="cardText" x="112" y="82">Historical machine data</text>
+    <rect class="mini" x="26" y="112" width="210" height="64"/>
+    <text class="smallText" x="44" y="137">MachineData table</text>
+    <text class="tinyText" x="44" y="160">Timestamped process values</text>
+  </g>
+
+  <path class="flowLine" d="M1212 428 C1256 428 1274 428 1315 428"/>
+  <text class="labelText" x="1238" y="401">/history</text>
+
+  <g transform="translate(1326 325)">
+    <rect class="card" x="0" y="0" width="188" height="206"/>
+    <rect class="iconFill" x="28" y="29" width="56" height="44" rx="8"/>
+    <path class="iconStroke" d="M37 92h38M56 73v19"/>
+    <text class="cardTitle" x="28" y="122">Dashboard</text>
+    <text class="cardText" x="28" y="152">FastAPI page plus</text>
+    <text class="cardText" x="28" y="178">WebSocket live view</text>
+  </g>
+
+  <path class="softLine" d="M1080 323 C1092 255 1298 255 1388 318"/>
+  <text class="labelText" x="1162" y="269">Live WebSocket reads PLC each second</text>
+
+  <text class="sectionTitle" x="94" y="610">How the project is organized</text>
+
+  <g transform="translate(86 646)">
+    <rect class="card" x="0" y="0" width="438" height="236"/>
+    <text class="cardTitle" x="30" y="46">TwinCAT side</text>
+    <text class="cardText" x="30" y="82">The PLC project holds machine logic, global</text>
+    <text class="cardText" x="30" y="111">variables, tasks, and POUs ready for import.</text>
+    <rect class="blueMini" x="30" y="142" width="176" height="48"/>
+    <text class="pillText" x="50" y="172">DataFluxPLC/</text>
+    <rect class="blueMini" x="222" y="142" width="176" height="48"/>
+    <text class="pillText" x="242" y="172">MachineData GVL</text>
+  </g>
+
+  <g transform="translate(582 646)">
+    <rect class="card" x="0" y="0" width="438" height="236"/>
+    <text class="cardTitle" x="30" y="46">Python services</text>
+    <text class="cardText" x="30" y="82">A lightweight runtime layer connects ADS,</text>
+    <text class="cardText" x="30" y="111">SQLite, FastAPI, and the browser dashboard.</text>
+    <rect class="mini" x="30" y="142" width="112" height="48"/>
+    <text class="pillText" x="49" y="172">logger.py</text>
+    <rect class="mini" x="158" y="142" width="112" height="48"/>
+    <text class="pillText" x="178" y="172">server.py</text>
+    <rect class="mini" x="286" y="142" width="112" height="48"/>
+    <text class="pillText" x="306" y="172">database.py</text>
+  </g>
+
+  <g transform="translate(1078 646)">
+    <rect class="card" x="0" y="0" width="438" height="236"/>
+    <text class="cardTitle" x="30" y="46">Code generation</text>
+    <text class="cardText" x="30" y="82">A device CSV feeds Jinja2 templates to create</text>
+    <text class="cardText" x="30" y="111">TwinCAT Function Blocks as .TcPOU files.</text>
+    <rect class="orangeMini" x="30" y="142" width="116" height="48"/>
+    <text class="pillText" x="51" y="172">devices.csv</text>
+    <path class="orangeLine" d="M157 166 H214"/>
+    <rect class="orangeMini" x="228" y="142" width="162" height="48"/>
+    <text class="pillText" x="249" y="172">generated/*.TcPOU</text>
+  </g>
+
+  <text class="sectionTitle" x="94" y="936">Roadmap</text>
+  <g transform="translate(230 908)">
+    <rect class="statusDone" x="0" y="0" width="132" height="46" rx="23"/>
+    <text class="pillText" x="29" y="29">Pipeline</text>
+    <rect class="statusDone" x="150" y="0" width="132" height="46" rx="23"/>
+    <text class="pillText" x="188" y="29">SQLite</text>
+    <rect class="statusDone" x="300" y="0" width="148" height="46" rx="23"/>
+    <text class="pillText" x="333" y="29">Dashboard</text>
+    <rect class="statusDone" x="466" y="0" width="164" height="46" rx="23"/>
+    <text class="pillText" x="498" y="29">Generation</text>
+    <rect class="statusNext" x="648" y="0" width="116" height="46" rx="23"/>
+    <text class="pillText" x="685" y="29">CI/CD</text>
+    <rect class="statusNext" x="782" y="0" width="116" height="46" rx="23"/>
+    <text class="pillText" x="815" y="29">Docker</text>
+    <rect class="statusNext" x="916" y="0" width="116" height="46" rx="23"/>
+    <text class="pillText" x="946" y="29">OPC-UA</text>
+    <rect class="statusNext" x="1050" y="0" width="116" height="46" rx="23"/>
+    <text class="pillText" x="1083" y="29">MQTT</text>
+  </g>
+</svg>
